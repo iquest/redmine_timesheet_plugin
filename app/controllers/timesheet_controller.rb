@@ -3,9 +3,9 @@ class TimesheetController < ApplicationController
 
   layout 'base'
   if Rails::VERSION::MAJOR < 5  # < Rails 5
-    before_filter :get_list_size
-    before_filter :get_precision
-    before_filter :get_activities
+    before_action :get_list_size
+    before_action :get_precision
+    before_action :get_activities
   else  # >= Rails 5
     before_action :get_list_size
     before_action :get_precision
@@ -37,7 +37,7 @@ class TimesheetController < ApplicationController
 
   def report
     if params && params[:timesheet]
-      @timesheet = Timesheet.new(params[:timesheet])
+      @timesheet = Timesheet.new(params.require(:timesheet).permit!)
     else
       redirect_to :action => 'index'
       return

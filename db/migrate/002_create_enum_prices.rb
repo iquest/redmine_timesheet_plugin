@@ -1,4 +1,4 @@
-class CreateEnumPrices < ActiveRecord::Migration
+class CreateEnumPrices < ActiveRecord::Migration[4.2]  
   def change
     create_table :prices do |t|
       t.references :enumerations
